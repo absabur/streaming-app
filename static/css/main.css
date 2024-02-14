@@ -24,7 +24,6 @@ label {
 
 .search input,
 .search-btn {
-  padding: 10px;
   border: none;
   outline: none;
   margin: 5px;
@@ -35,16 +34,21 @@ label {
 
 .search input {
   border-radius: 20px 0 0 20px;
+  padding: 5px 35px 5px 15px;
 }
 .search-btn {
   border-radius: 0 20px 20px 0;
+  background-color: #b7b7b7;
+  padding: 5px 10px 5px 5px;
+}
+.search-btn:hover{
   background-color: aqua;
 }
 
 .cross {
   background-color: transparent !important;
   margin-left: -35px;
-  margin-right: 10px;
+  margin-right: 2px;
   padding: 0;
   cursor: pointer;
   border: none;
