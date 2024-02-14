@@ -1,0 +1,31 @@
+{% extends "base.html" %} {%block title%}Videos{%endblock%} {%block body_block%}
+<form class="search" method="POST">
+  {% csrf_token %}
+  <input type="text" name="search" placeholder="Search" />
+  <span class="cross" type="reset">
+    <i class="fa-solid fa-xmark fa-2x"></i>
+  </span>
+  <button class="btn btn-light search-btn" type="submit">Search</button>
+</form>
+<h1 class="text-center text-light">Videos</h1>
+{%if result%}
+<h4 class="text-center text-light">
+  <span class="text-warning">{{videos|length}}</span> Result for "<span
+    class="text-warning"
+    >{{result}}</span
+  >"
+</h4>
+{%endif%}
+<div class="videos">
+  {% comment %} {%if videos|length == 0%}
+  <h2 class="text-center text-light">No Products Found</h2>
+  {%endif%} {% endcomment %} 
+  {%for video in videos%}
+  <a href="{%url 'App_Videos:video_details' pk=video.pk%}">
+    <p>{{video.title|slice:30}}...</p>
+    <img src="/static/{{video.thumbnail}}" />
+    <span class="btn btn-dark category">{{video.category}}</span>
+  </a>
+  {%endfor%}
+</div>
+{%endblock%}
