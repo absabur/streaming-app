@@ -3,6 +3,7 @@ from django.urls import reverse
 from App_Videos.models import *
 from App_Videos.forms import *
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -30,13 +31,16 @@ def video_details(request, pk):
         
     if request.method == 'POST':
         if not request.user.is_authenticated:
-            return redirect('App_Auth:login')
+            first = reverse('App_Auth:login')
+            next = reverse('App_Videos:video_details', kwargs={'pk': pk})
+            return redirect("{}?next={}".format(first, next))
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.user = request.user
             comment.video = video
             comment.save()
+            messages.success(request,"Comment Added!")
             return HttpResponseRedirect(reverse('App_Videos:video_details', kwargs={'pk': pk}))
     else:
         form = CommentForm()
@@ -48,8 +52,10 @@ def like(request, pk):
     isLiked = Likes.objects.filter(video=video, user=request.user)
     if isLiked:
         isLiked.delete()
+        messages.warning(request,"Like Removed")
     else:
         like = Likes(video=video, user=request.user)
         like.save()
+        messages.success(request,"Liked Successfully")
     return HttpResponseRedirect(reverse('App_Videos:video_details', kwargs={'pk': pk}))
 

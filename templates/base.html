@@ -78,6 +78,30 @@
           </div>
         </nav>
     </header>
+    
+    <div class="messages container mt-2">
+      {%if messages%} {%for message in messages%}
+      <div
+        {%if
+        message.tags%}
+        class="alert alert-{{message.tags}} alert-dismissible fade show"
+        {%
+        endif
+        %}
+        role="alert"
+      >
+        {{message}}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endfor%} {%endif%}
+    </div>
 
     <main class='container pt-4 pb-4'>
         <!-- Content block that will be overridden in child templates -->
