@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 from . import views
 
-handler404 = views.handler404
+# handler404 = views.handler404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
