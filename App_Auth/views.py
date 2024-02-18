@@ -12,7 +12,7 @@ def signup_view(request):
         if form.is_valid():
             form.save()
             messages.success(request,"Account created successfully!")
-            return redirect('App_Auth:login_view')
+            return redirect('App_Auth:login')
     else:
         form = UserCreationForm()
     return render(request, 'App_Auth/signup.html', {'form': form})
